@@ -20,6 +20,7 @@ navigator.geolocation.getCurrentPosition((answer) => {
     let answer = await fetch(URL);
     answer = await answer.json();
     let devices = answer.devices;
+    const arrLength = 5;
 
     devices
       .map((device) => {
@@ -33,7 +34,7 @@ navigator.geolocation.getCurrentPosition((answer) => {
         return device;
       })
       .sort((a, b) => a.distance - b.distance)
-      .filter((device, i) => i < 5)
+      .filter((device, i) => i < arrLength)
       .forEach((device) => {
         console.log(
           `${device.fullAddressUa}, растояние до пользователя ${Math.round(
