@@ -1,3 +1,4 @@
+// Функция сщздает обьект с координатами пользователя
 let getData = (latitude, longitude) => {
   return {
     currLatitude: latitude,
@@ -5,6 +6,7 @@ let getData = (latitude, longitude) => {
   };
 };
 
+// Основная функция
 navigator.geolocation.getCurrentPosition((answer) => {
   let URL = `
       https://image.maps.api.here.com/mia/1.6/mapview?app_id=oZmMWRV4tAjQmgkxBvF0&app_code=x5pKHqifhw1mnS_zBTIFsA&z=14&w=600&h=600&c=${answer.coords.latitude},${answer.coords.longitude}
@@ -24,24 +26,25 @@ navigator.geolocation.getCurrentPosition((answer) => {
         let result = getDistanceFromLoc(
           loc.currLatitude,
           loc.currLongitude,
-          device.latitude,
-          device.longitude
+          device.longitude,
+          device.latitude
         );
         device.distance = result;
         return device;
       })
-      .sort((a, b) => b.distance - a.distance)
+      .sort((a, b) => a.distance - b.distance)
       .filter((device, i) => i < 5)
       .forEach((device) => {
         console.log(
-          `${device.fullAddressUa}, растояние до пользователя ${device.distance}`
+          `${device.fullAddressUa}, растояние до пользователя ${Math.round(
+            device.distance * 1000
+          )}m.`
         );
       });
   }
   getTerminal();
 });
-
-
+// Функция с формулой расчета растояния по координатам
 const getDistanceFromLoc = (lat1, long1, lat2, long2) => {
   const R = 6371; //radius of the earth in km
   let dLat = deg2rad(lat2 - lat1);
