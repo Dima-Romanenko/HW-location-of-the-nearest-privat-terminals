@@ -10,3 +10,11 @@ img {
   border-radius: 50%;
   border: 5px solid white;
 }
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.address {
+  padding-top: 20px;
+}

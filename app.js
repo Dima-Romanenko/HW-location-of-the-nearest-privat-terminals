@@ -1,3 +1,4 @@
+const outputBlock = document.querySelector(".info");
 // Функция сщздает обьект с координатами пользователя
 let getData = (latitude, longitude) => {
   return {
@@ -36,11 +37,11 @@ navigator.geolocation.getCurrentPosition((answer) => {
       .sort((a, b) => a.distance - b.distance)
       .filter((device, i) => i < arrLength)
       .forEach((device) => {
-        console.log(
-          `${device.fullAddressUa}, растояние до пользователя ${Math.round(
-            device.distance * 1000
-          )}m.`
-        );
+        outputBlock.innerHTML += `<div class="address">${
+          device.fullAddressUa
+        }, растояние до пользователя ${Math.round(
+          device.distance * 1000
+        )}m. </div>`;
       });
   }
   getTerminal();
